@@ -1,0 +1,12 @@
+<form class="question-form">
+  <!-- Question -->
+  <mat-card>{{currentQuestion}}</mat-card>
+
+  <!-- Answer Input -->
+  <mat-form-field class="question-full-width">
+    <input matInput placeholder="Enter your answer here" (focusout)="onInputFocusOut($event)">
+  </mat-form-field>
+
+  <!-- Submit Button -->
+  <button type="submit" mat-raised-button color="primary" (click)="submitAnswer()">Submit</button>
+</form>

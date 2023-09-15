@@ -1,0 +1,31 @@
+mat-toolbar{
+  width:100%;
+  background-color: lightblue;
+  height: 9%;
+}
+.first{
+  width:100%;
+  /* Center the item */
+  display: flex;
+  justify-content: center;
+}
+
+.nav{
+  background-color: aliceblue !important;
+  margin-left: 5px;
+}
+
+mat-toolbar-row{
+  width:100%;
+  display: flex;
+  padding-top: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* .spacer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
