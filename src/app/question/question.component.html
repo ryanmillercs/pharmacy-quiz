@@ -1,6 +1,11 @@
 <form class="question-form">
   <!-- Question -->
-  <mat-card>{{currentQuestion}}</mat-card>
+  <div class="question">
+    <mat-card>{{currentQuestion}}</mat-card>
+    <button mat-icon-button matTooltip={{this.targetAnswer}} class="questionIcon">
+    </button>
+  </div>
+
 
   <!-- Answer Input -->
   <mat-form-field class="question-full-width">

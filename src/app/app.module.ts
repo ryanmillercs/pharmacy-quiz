@@ -16,13 +16,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
     NavComponent,
-    FlashcardsComponent
+    FlashcardsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatCardModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

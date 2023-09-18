@@ -7,8 +7,34 @@ form{
 button{
   background-color: aliceblue !important;
   margin: 10px;
+  color: black !important;
+}
+
+mat-card{
+  margin: 10px;
+  padding: 10px;
+}
+
+mat-form-field{
+  width: 99%;
+  margin: 9px;
 }
 
 input{
   margin: 10px;
+}
+
+.questionIcon{
+  background-image: url('../../assets/questionmark.png');
+  background-size:cover ; /* Adjust the size as needed */
+  width: 24px; /* Set the width and height as needed */
+  height: 24px;
+}
+
+.question{
+  display: flex;
+  justify-content:space-between;
+}
+mat-card{
+  width: 90%;
 }
