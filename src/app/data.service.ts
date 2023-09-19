@@ -31,10 +31,10 @@ export class DataService {
         Drug_class: drug[3],
         Indication: drug[4],
         Pharmacologic_activity: drug[5],
-        Target: drug[6],
-        Target_class_location: drug[7],
-        Target_normal_role: drug[8],
-        Mechanism_of_action: drug[9],
+        Drug_Target: drug[6],
+        Target_class_and_location: drug[7],
+        Target_normal_role_Physiology: drug[8],
+        MOA: drug[9],
       };
     });
     // console.log(this.drugs);

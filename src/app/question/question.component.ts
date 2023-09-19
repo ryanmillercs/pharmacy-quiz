@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-question',
@@ -15,21 +16,29 @@ export class QuestionComponent implements OnInit {
     'Drug_class',
     'Indication',
     'Pharmacologic_activity',
-    'Target',
-    'Target_class_location',
-    'Target_normal_role',
-    'Mechanism_of_action',
+    'Drug_Target',
+    'Target_class_and_location',
+    'Target_normal_role_Physiology',
+    'MOA',
   ];
+  usedQuestions: { [key: string]: string } = {};
   currentQuestion = '';
   targetAnswer = '';
   currentAnswer = '';
   drugs: any;
+  selectedCategories: string[] = [];
 
   ngOnInit() {
     console.log('QuestionComponent initialized');
     this.drugs = this.dataService.getDrugs();
     console.log(this.drugs);
-    this.currentQuestion = this.getRandomQuestion();
+    let question = this.getRandomQuestion();
+    this.usedQuestions[question] = this.targetAnswer;
+    this.currentQuestion = question;
+  }
+
+  selectedChip() {
+    console.log('Selected categories:', this.selectedCategories);
   }
 
   submitAnswer() {
@@ -41,9 +50,15 @@ export class QuestionComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.currentQuestion = this.getRandomQuestion();
+      let question = this.getRandomQuestion();
+      while (this.usedQuestions.hasOwnProperty(question)) {
+        question = this.getRandomQuestion();
+      }
+      this.currentQuestion = question;
+      this.usedQuestions[question] = this.targetAnswer;
     });
     // }
+    console.log(this.usedQuestions);
   }
 
   onInputFocusOut(event: any) {
@@ -57,12 +72,29 @@ export class QuestionComponent implements OnInit {
     let randomColumn = Math.ceil(Math.random() * 8);
 
     let colName = this.drug_columns[randomColumn];
-
-    this.targetAnswer = this.drugs[randomDrug][colName];
-    if (this.targetAnswer == undefined) {
-      this.targetAnswer = this.drugs[randomDrug]['Brand_name'];
+    // Keep generating random columns until we get one that is not undefined
+    while (colName == undefined) {
+      randomColumn = Math.ceil(Math.random() * 8);
+      colName = this.drug_columns[randomColumn];
     }
-
+    let categoriesSize = this.selectedCategories.length;
+    if (categoriesSize > 0) {
+      let randomCategory = Math.floor(Math.random() * categoriesSize);
+      colName = this.selectedCategories[randomCategory];
+      console.log('Selected category:', colName)
+    }
+    this.targetAnswer = this.drugs[randomDrug][colName];
+    while (
+      this.targetAnswer == undefined ||
+      this.targetAnswer == '' ||
+      this.targetAnswer.length <= 1
+    ) {
+      randomColumn = Math.floor(Math.random() * 9);
+      colName = this.drug_columns[randomColumn];
+      this.targetAnswer = this.drugs[randomDrug][colName];
+    }
+    console.log(this.drugs);
+    console.log(`What is the ${colName} of ${randomDrug}?`);
     return `What is the ${colName.replaceAll('_', ' ')} of ${randomDrug}?`;
   }
 

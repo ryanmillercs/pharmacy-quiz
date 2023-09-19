@@ -1,4 +1,11 @@
 <form class="question-form">
+
+  <mat-chip-listbox selectable multiple name="selectedCategories" [(ngModel)]="selectedCategories"
+    (click)="selectedChip()">
+    <mat-chip-option *ngFor="let category of drug_columns" [value]="category">
+      {{category.replaceAll('_', ' ')}}
+    </mat-chip-option>
+  </mat-chip-listbox>
   <!-- Question -->
   <div class="question">
     <mat-card>{{currentQuestion}}</mat-card>

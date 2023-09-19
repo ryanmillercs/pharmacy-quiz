@@ -19,7 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dia
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
