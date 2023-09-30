@@ -1,40 +1,47 @@
-form{
+form {
   padding: 10px;
   background-color: lightgrey;
   height: 100%;
 }
 
-button{
+button {
   background-color: aliceblue !important;
   margin: 10px;
   color: black !important;
 }
 
-mat-card{
+mat-card {
   margin: 10px;
   padding: 10px;
 }
 
-mat-form-field{
+mat-form-field {
   width: 99%;
   margin: 9px;
 }
 
-input{
+input {
   margin: 10px;
 }
 
-.questionIcon{
-  background-image: url('../../assets/questionmark.png');
-  background-size:cover ; /* Adjust the size as needed */
+.questionIcon {
+  background-image: url("../../assets/questionmark.png");
+  background-size: cover; /* Adjust the size as needed */
   width: 24px; /* Set the width and height as needed */
   height: 24px;
 }
 
-.question{
+.question {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
 }
-mat-card{
+
+.red-background {
+  text-decoration: underline !important;
+  text-decoration-color: red !important;
+  /* background-color: blueviolet ; */
+}
+
+mat-card {
   width: 90%;
 }

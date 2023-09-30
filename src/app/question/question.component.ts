@@ -27,6 +27,7 @@ export class QuestionComponent implements OnInit {
   currentAnswer = '';
   drugs: any;
   selectedCategories: string[] = [];
+  isBackgroundRed = false;
 
   ngOnInit() {
     console.log('QuestionComponent initialized');
@@ -43,22 +44,30 @@ export class QuestionComponent implements OnInit {
 
   submitAnswer() {
     console.log(this.currentAnswer);
-    // if(this.currentAnswer == this.targetAnswer) {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {
-        answer: this.targetAnswer,
-      },
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      let question = this.getRandomQuestion();
-      while (this.usedQuestions.hasOwnProperty(question)) {
-        question = this.getRandomQuestion();
-      }
-      this.currentQuestion = question;
-      this.usedQuestions[question] = this.targetAnswer;
-    });
-    // }
-    console.log(this.usedQuestions);
+    if (
+      this.currentQuestion.includes('Brand name') &&
+      this.currentAnswer.toLowerCase() !== this.targetAnswer.toLowerCase()
+    ) {
+      console.log("WRONG ANSWER")
+      this.isBackgroundRed = true;
+    } else {
+      this.isBackgroundRed = false;
+      const dialogRef = this.dialog.open(DialogComponent, {
+        data: {
+          answer: this.targetAnswer,
+        },
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        let question = this.getRandomQuestion();
+        while (this.usedQuestions.hasOwnProperty(question)) {
+          question = this.getRandomQuestion();
+        }
+        this.currentQuestion = question;
+        this.usedQuestions[question] = this.targetAnswer;
+      });
+      console.log(this.usedQuestions);
+      this.currentAnswer = '';
+    }
   }
 
   onInputFocusOut(event: any) {
@@ -81,7 +90,7 @@ export class QuestionComponent implements OnInit {
     if (categoriesSize > 0) {
       let randomCategory = Math.floor(Math.random() * categoriesSize);
       colName = this.selectedCategories[randomCategory];
-      console.log('Selected category:', colName)
+      console.log('Selected category:', colName);
     }
     this.targetAnswer = this.drugs[randomDrug][colName];
     while (

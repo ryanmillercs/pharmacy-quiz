@@ -16,7 +16,8 @@
 
   <!-- Answer Input -->
   <mat-form-field class="question-full-width">
-    <input matInput placeholder="Enter your answer here" (focusout)="onInputFocusOut($event)">
+    <input matInput placeholder="Enter your answer here" [(ngModel)]="currentAnswer" name="currentAnswer"
+      (focusout)="onInputFocusOut($event)" [class.red-background]="isBackgroundRed">
   </mat-form-field>
 
   <!-- Submit Button -->
