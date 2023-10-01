@@ -20,6 +20,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatChipsModule} from '@angular/material/chips';
     QuestionComponent,
     NavComponent,
     FlashcardsComponent,
-    DialogComponent
+    DialogComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

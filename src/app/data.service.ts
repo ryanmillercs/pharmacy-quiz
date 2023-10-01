@@ -8,11 +8,34 @@ export class DataService {
   constructor() { }
 
   drugs: any = {};
+  currentDrugs:any = {};
 
   showQuestionsComponent = false;
+  showListComponent = false;
+  showFlashCardsComponent = false;
 
-  toggleQuestions() {
-    this.showQuestionsComponent = !this.showQuestionsComponent;
+  changeMode(mode:string){
+    if(mode === 'List'){
+      this.showQuestionsComponent = false;
+      this.showListComponent = !this.showListComponent;
+      this.showFlashCardsComponent = false;
+    }else if(mode === 'Questions'){
+      this.showQuestionsComponent = !this.showQuestionsComponent;
+      this.showListComponent = false;
+      this.showFlashCardsComponent = false;
+    }else if(mode === 'FlashCards'){
+      this.showQuestionsComponent = false;
+      this.showListComponent = false;
+      this.showFlashCardsComponent = !this.showFlashCardsComponent;
+    }
+  }
+
+  setCurrentDrugs(drugs:any){
+    this.currentDrugs = drugs;
+  }
+
+  getCurrentDrugs(){
+    return this.currentDrugs;
   }
 
   getDrugs() {
@@ -35,9 +58,10 @@ export class DataService {
         Target_class_and_location: drug[7],
         Target_normal_role_Physiology: drug[8],
         MOA: drug[9],
+        stage: drug[0],
       };
     });
-    // console.log(this.drugs);
+    console.log(this.drugs);
   }
 
 }

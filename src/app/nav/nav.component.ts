@@ -10,8 +10,8 @@ export class NavComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
 
-  showQuestions() {
-    this.dataService.toggleQuestions()
+  changeTab(mode: string) {
+    this.dataService.changeMode(mode);
   }
 
   async ngOnInit() {
