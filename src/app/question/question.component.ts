@@ -44,11 +44,12 @@ export class QuestionComponent implements OnInit {
 
   submitAnswer() {
     console.log(this.currentAnswer);
+    const colMatch: RegExp = /(Brand name) | (Generic Name)/g;
     if (
-      this.currentQuestion.includes('Brand name') &&
+      this.currentQuestion.match(colMatch) &&
       this.currentAnswer.toLowerCase() !== this.targetAnswer.toLowerCase()
     ) {
-      console.log("WRONG ANSWER")
+      console.log('WRONG ANSWER');
       this.isBackgroundRed = true;
     } else {
       this.isBackgroundRed = false;
@@ -92,7 +93,11 @@ export class QuestionComponent implements OnInit {
       colName = this.selectedCategories[randomCategory];
       console.log('Selected category:', colName);
     }
+    // TODO Fix this
+    console.log('COL ANME');
+    console.log(colName);
     this.targetAnswer = this.drugs[randomDrug][colName];
+    if (colName == 'Brand_name') colName = this.pickBrandOrGeneric(randomDrug);
     while (
       this.targetAnswer == undefined ||
       this.targetAnswer == '' ||
@@ -105,6 +110,16 @@ export class QuestionComponent implements OnInit {
     console.log(this.drugs);
     console.log(`What is the ${colName} of ${randomDrug}?`);
     return `What is the ${colName.replaceAll('_', ' ')} of ${randomDrug}?`;
+  }
+
+  pickBrandOrGeneric(drug: string): string {
+    let brandOrGeneric = Math.floor(Math.random() * 2);
+    if (brandOrGeneric == 0) {
+      return 'Brand_name';
+    } else {
+      this.targetAnswer = this.drugs[drug]['Brand_name'];
+      return 'Generic_name';
+    }
   }
 
   getRandomProperty(obj: any) {
