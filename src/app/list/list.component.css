@@ -1,0 +1,15 @@
+.table{
+  position: relative; /* Create a positioning context for the sticky scrollbar */
+  height: 600px; /* Adjust the height as needed */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.sticky-scrollbar {
+  position: absolute; /* Position the scrollbar absolutely within the .table container */
+  top: 0; /* Stick it to the top */
+  right: 0; /* Stick it to the right */
+  width: 10px; /* Set the width of the scrollbar as desired */
+  background-color: #f0f0f0; /* Background color of the scrollbar */
+  /* Add other styling for the scrollbar as needed */
+}

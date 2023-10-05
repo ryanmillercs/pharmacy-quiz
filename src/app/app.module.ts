@@ -21,6 +21,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
 import { ListComponent } from './list/list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ListComponent } from './list/list.component';
     MatTooltipModule,
     MatDialogModule,
     MatChipsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

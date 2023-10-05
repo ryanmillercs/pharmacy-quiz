@@ -11,6 +11,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class QuestionComponent implements OnInit {
   constructor(private dataService: DataService, public dialog: MatDialog) {}
   drug_columns = [
+    'Generic_name',
     'Brand_name',
     'Drug_class',
     'Indication',
@@ -30,7 +31,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     console.log('QuestionComponent initialized');
-    this.drugs = this.dataService.getDrugs();
+    this.drugs = this.dataService.getCurrentDrugs();
     console.log(this.drugs);
     let question = this.getRandomQuestion();
     this.usedQuestions[question] = this.targetAnswer;
@@ -44,8 +45,10 @@ export class QuestionComponent implements OnInit {
   submitAnswer() {
     console.log(this.currentAnswer);
     const colMatch: RegExp = /(Brand name) | (Generic Name)/g;
+    console.log(this.currentQuestion.match(colMatch));
     if (
-      this.currentQuestion.match(colMatch) &&
+      (this.currentQuestion.includes('Brand name') ||
+        this.currentQuestion.includes('Generic name')) &&
       this.currentAnswer.toLowerCase() !== this.targetAnswer.toLowerCase()
     ) {
       console.log('WRONG ANSWER');
@@ -61,6 +64,10 @@ export class QuestionComponent implements OnInit {
         let question = this.getRandomQuestion();
         while (this.usedQuestions.hasOwnProperty(question)) {
           question = this.getRandomQuestion();
+          // Prevent infinite loop
+          if (Object.keys(this.usedQuestions).length == this.drugs.length) {
+            this.selectedCategories = [];
+          }
         }
         this.currentQuestion = question;
         this.usedQuestions[question] = this.targetAnswer;
@@ -76,27 +83,24 @@ export class QuestionComponent implements OnInit {
   }
 
   getRandomQuestion() {
-    let keys = Object.keys(this.drugs);
-    let randomDrug = keys[Math.floor(Math.random() * keys.length)];
-    let randomColumn = Math.ceil(Math.random() * 8);
-
+    let randomDrugNumber = Math.floor(Math.random() * this.drugs.length);
+    let randomColumn = Math.ceil(Math.random() * 8) - 1;
     let colName = this.drug_columns[randomColumn];
-    // Keep generating random columns until we get one that is not undefined
-    while (colName == undefined) {
-      randomColumn = Math.ceil(Math.random() * 8);
-      colName = this.drug_columns[randomColumn];
-    }
     let categoriesSize = this.selectedCategories.length;
     if (categoriesSize > 0) {
       let randomCategory = Math.floor(Math.random() * categoriesSize);
       colName = this.selectedCategories[randomCategory];
       console.log('Selected category:', colName);
     }
-    // TODO Fix this
-    console.log('COL ANME');
-    console.log(colName);
-    this.targetAnswer = this.drugs[randomDrug][colName];
-    if (colName == 'Brand_name') colName = this.pickBrandOrGeneric(randomDrug);
+    // Keep generating random columns until we get one that is not undefined
+    while (colName == undefined) {
+      randomColumn = Math.ceil(Math.random() * 8) - 1;
+      colName = this.drug_columns[randomColumn];
+    }
+    // Default to using Generic_name
+    let randomDrugName = this.drugs[randomDrugNumber]['Generic_name'];
+    this.targetAnswer = this.drugs[randomDrugNumber][colName];
+
     while (
       this.targetAnswer == undefined ||
       this.targetAnswer == '' ||
@@ -104,21 +108,18 @@ export class QuestionComponent implements OnInit {
     ) {
       randomColumn = Math.floor(Math.random() * 9);
       colName = this.drug_columns[randomColumn];
-      this.targetAnswer = this.drugs[randomDrug][colName];
+      this.targetAnswer = this.drugs[randomDrugNumber][colName];
+    }
+    // If colName is Brand_name, then the question should be "What is the Generic_name of Brand_name?"
+    // If colName is Generic_name, then the question should be "What is the Brand_name of Generic_name?"
+    if (colName == 'Brand_name') {
+      randomDrugName = this.drugs[randomDrugNumber]['Generic_name'];
+    } else if (colName == 'Generic_name') {
+      randomDrugName = this.drugs[randomDrugNumber]['Brand_name'];
     }
     console.log(this.drugs);
-    console.log(`What is the ${colName} of ${randomDrug}?`);
-    return `What is the ${colName.replaceAll('_', ' ')} of ${randomDrug}?`;
-  }
-
-  pickBrandOrGeneric(drug: string): string {
-    let brandOrGeneric = Math.floor(Math.random() * 2);
-    if (brandOrGeneric == 0) {
-      return 'Brand_name';
-    } else {
-      this.targetAnswer = this.drugs[drug]['Brand_name'];
-      return 'Generic_name';
-    }
+    console.log(`What is the ${colName} of ${randomDrugName}?`);
+    return `What is the ${colName.replaceAll('_', ' ')} of ${randomDrugName}?`;
   }
 
   getRandomProperty(obj: any) {
