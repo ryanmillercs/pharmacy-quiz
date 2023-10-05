@@ -5,10 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  constructor() { }
+  constructor() {
+    this.drugs = [];
+  }
 
-  drugs: any = {};
+  drugs: Drug[];
   currentDrugs:any = {};
+  stages = new Set();
+  selectedCategories: string[] = [];
 
   showQuestionsComponent = false;
   showListComponent = false;
@@ -40,8 +44,18 @@ export class DataService {
 
   getDrugs() {
     return this.drugs;
-
   }
+  getStages() {
+    return this.stages;
+  }
+
+  getSelectedCategories() {
+    return this.selectedCategories;
+  }
+  setSelectedCategories(selectedCategories: string[]) {
+    this.selectedCategories = selectedCategories;
+  }
+
 
   async readTSV() {
     let tsv = await (await fetch('assets/drugs.tsv')).text();
@@ -49,7 +63,8 @@ export class DataService {
     let tsv_rows = tsv.split("\n").slice(2);
     tsv_rows.forEach((row) => {
       let drug = row.split("\t");
-      this.drugs[drug[1]] = {
+      this.drugs.push( {
+        Generic_name: drug[1],
         Brand_name: drug[2],
         Drug_class: drug[3],
         Indication: drug[4],
@@ -59,9 +74,25 @@ export class DataService {
         Target_normal_role_Physiology: drug[8],
         MOA: drug[9],
         stage: drug[0],
-      };
+    }as Drug);
+      this.stages.add(drug[0]);
     });
     console.log(this.drugs);
+    this.currentDrugs = this.drugs;
+    // console.log(this.stages)
   }
 
+}
+
+export interface Drug {
+  Generic_name: string;
+  Brand_name: string;
+  Drug_class: string;
+  Indication: string;
+  Pharmacologic_activity: string;
+  Drug_Target: string;
+  Target_class_and_location: string;
+  Target_normal_role_Physiology: string;
+  MOA: string;
+  stage: string;
 }
