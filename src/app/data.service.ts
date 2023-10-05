@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-
   constructor() {
     this.drugs = [];
   }
 
   drugs: Drug[];
-  currentDrugs:any = {};
+  currentDrugs: any = {};
   stages = new Set();
   selectedCategories: string[] = [];
 
@@ -18,27 +17,27 @@ export class DataService {
   showListComponent = false;
   showFlashCardsComponent = false;
 
-  changeMode(mode:string){
-    if(mode === 'List'){
+  changeMode(mode: string) {
+    if (mode === 'List') {
       this.showQuestionsComponent = false;
       this.showListComponent = !this.showListComponent;
       this.showFlashCardsComponent = false;
-    }else if(mode === 'Questions'){
+    } else if (mode === 'Questions') {
       this.showQuestionsComponent = !this.showQuestionsComponent;
       this.showListComponent = false;
       this.showFlashCardsComponent = false;
-    }else if(mode === 'FlashCards'){
+    } else if (mode === 'FlashCards') {
       this.showQuestionsComponent = false;
       this.showListComponent = false;
       this.showFlashCardsComponent = !this.showFlashCardsComponent;
     }
   }
 
-  setCurrentDrugs(drugs:any){
+  setCurrentDrugs(drugs: any) {
     this.currentDrugs = drugs;
   }
 
-  getCurrentDrugs(){
+  getCurrentDrugs() {
     return this.currentDrugs;
   }
 
@@ -56,32 +55,36 @@ export class DataService {
     this.selectedCategories = selectedCategories;
   }
 
-
   async readTSV() {
-    let tsv = await (await fetch('assets/drugs.tsv')).text();
+    let tsv = await (await fetch('assets/drug1.tsv')).text();
     // console.log(tsv);
-    let tsv_rows = tsv.split("\n").slice(2);
+    let tsv_rows = tsv.split('\n').slice(2);
+    let currentStage:string = '';
     tsv_rows.forEach((row) => {
-      let drug = row.split("\t");
-      this.drugs.push( {
-        Generic_name: drug[1],
-        Brand_name: drug[2],
-        Drug_class: drug[3],
-        Indication: drug[4],
-        Pharmacologic_activity: drug[5],
-        Drug_Target: drug[6],
-        Target_class_and_location: drug[7],
-        Target_normal_role_Physiology: drug[8],
-        MOA: drug[9],
-        stage: drug[0],
-    }as Drug);
-      this.stages.add(drug[0]);
+      let drug = row.split('\t');
+      if (!drug[1].match(/(Week) [0-9][0-9]/)) {
+        if (drug[0] !== '') currentStage = drug[0];
+        this.drugs.push({
+          Generic_name: drug[1],
+          Brand_name: drug[2],
+          Drug_class: drug[3],
+          Indication: drug[4],
+          Pharmacologic_activity: drug[5],
+          Drug_Target: drug[6],
+          Target_class_and_location: drug[7],
+          Target_normal_role_Physiology: drug[8],
+          MOA: drug[9],
+          stage: currentStage,
+        } as Drug);
+        this.stages.add(drug[0]);
+      }
     });
-    console.log(this.drugs);
+    // console.log(this.drugs);
+    // console.log(this.stages);
+    this.stages.delete('');
     this.currentDrugs = this.drugs;
     // console.log(this.stages)
   }
-
 }
 
 export interface Drug {

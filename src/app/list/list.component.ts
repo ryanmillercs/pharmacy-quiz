@@ -30,9 +30,7 @@ export class ListComponent implements OnInit {
   currentDrugs: any = {};
 
   ngOnInit() {
-    console.log('ListComponent initialized');
     this.drugs = this.dataService.getDrugs();
-    console.log(this.drugs);
     this.selectedCategories = this.dataService.getSelectedCategories();
     if(this.selectedCategories.length == 0){
       this.dataSource = new MatTableDataSource(this.drugs);
@@ -48,15 +46,16 @@ export class ListComponent implements OnInit {
   }
 
   selectedChip() {
-    console.log('Selected categories:', this.selectedCategories);
     this.currentDrugs = this.drugs.filter((drug: any) => {
       return this.selectedCategories.includes(drug.stage);
     });
     this.dataSource = new MatTableDataSource(this.currentDrugs);
-    this.dataService.setCurrentDrugs(this.drugs);
+    this.dataService.setCurrentDrugs(this.currentDrugs);
+    // If no categories are selected, display all drugs
     if(this.selectedCategories.length == 0){
       this.dataSource = new MatTableDataSource(this.drugs);
     }
+    // Set so that the question component can access the current selected drugs
     this.dataService.setSelectedCategories(this.selectedCategories);
   }
 }

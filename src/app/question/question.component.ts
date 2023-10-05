@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-question',
@@ -28,14 +29,23 @@ export class QuestionComponent implements OnInit {
   drugs: any;
   selectedCategories: string[] = [];
   isBackgroundRed = false;
+  questionLimit = 0;
+  remainingQuestions = 0;
 
   ngOnInit() {
-    console.log('QuestionComponent initialized');
     this.drugs = this.dataService.getCurrentDrugs();
     console.log(this.drugs);
     let question = this.getRandomQuestion();
     this.usedQuestions[question] = this.targetAnswer;
     this.currentQuestion = question;
+    this.drugs.forEach((drug: any) => {
+      Object.values(drug).forEach((value: any) => {
+        if (value !== undefined && value !== '' && !value.match(/[0-9][0-9]/)) {
+          this.questionLimit++;
+        }
+      });
+    });
+    this.remainingQuestions = this.questionLimit;
   }
 
   selectedChip() {
@@ -45,7 +55,6 @@ export class QuestionComponent implements OnInit {
   submitAnswer() {
     console.log(this.currentAnswer);
     const colMatch: RegExp = /(Brand name) | (Generic Name)/g;
-    console.log(this.currentQuestion.match(colMatch));
     if (
       (this.currentQuestion.includes('Brand name') ||
         this.currentQuestion.includes('Generic name')) &&
@@ -64,15 +73,16 @@ export class QuestionComponent implements OnInit {
         let question = this.getRandomQuestion();
         while (this.usedQuestions.hasOwnProperty(question)) {
           question = this.getRandomQuestion();
+          this.remainingQuestions--;
           // Prevent infinite loop
-          if (Object.keys(this.usedQuestions).length == this.drugs.length) {
-            this.selectedCategories = [];
+          if (this.remainingQuestions <= 0) {
+            this.usedQuestions = {};
+            this.remainingQuestions = this.questionLimit;
           }
         }
         this.currentQuestion = question;
         this.usedQuestions[question] = this.targetAnswer;
       });
-      console.log(this.usedQuestions);
       this.currentAnswer = '';
     }
   }

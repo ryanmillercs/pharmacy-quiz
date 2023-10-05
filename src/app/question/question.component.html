@@ -9,7 +9,9 @@
   <!-- Question -->
   <div class="question">
     <mat-card>{{currentQuestion}}</mat-card>
-    <button mat-icon-button matTooltip={{this.targetAnswer}} class="questionIcon">
+    <div matTooltip={{this.targetAnswer}} matTooltipPosition="left" #tooltip="matTooltip" (click)="tooltip.toggle()" class="tip">
+    </div>
+    <button mat-icon-button matTooltip="" (click)="tooltip.toggle()" class="questionIcon">
     </button>
   </div>
 

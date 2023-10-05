@@ -45,3 +45,31 @@ Mtg #	Drug Generic Name	Drug Brand Name	Drug Class	FDA-Approved Indications	Phar
 10	empagliflozin	Jardiance	antidiabetic agent, SGLT2 inhibitor 	diabetes mellitus, type 2 (T2DM)	reversible inhibitor [Note: this is correct the way it is!]	sodium-glucose cotransporter 2 (SGLT2)			
 10	metformin	Glucophage, Glumetza, Riomet	antidiabetic agent, biguanide 	diabetes mellitus, type 2 (T2DM)	activator	AMP-activated protein kinase (AMPK)			
 10	metformin + sitagliptin	Janumet							
+11	atorvastatin	Lipitor	antilipemic agent, HMG-CoA reductase inhibitor	hypercholesterolemia	reversible competitive inhibitor	HMG-CoA reductase			
+11	lovastatin	Mevacor; Altoprev	antilipemic agent, HMG-CoA reductase inhibitor	hypercholesterolemia	reversible competitive inhibitor	HMG-CoA reductase			
+11	pravastatin	Pravachol	antilipemic agent, HMG-CoA reductase inhibitor	hypercholesterolemia	reversible competitive inhibitor	HMG-CoA reductase			
+11	rosuvastatin	Crestor	antilipemic agent, HMG-CoA reductase inhibitor	hypercholesterolemia	reversible competitive inhibitor	HMG-CoA reductase			
+11	simvastatin	Zocor	antilipemic agent, HMG-CoA reductase inhibitor	hypercholesterolemia	reversible competitive inhibitor	HMG-CoA reductase			
+11	ezetimibe	Zetia	antilipemic agent, 2-azetidinone 	hypercholesterolemia	reversible non-competitve inhibitor	Niemann-Pick C1-Like 1 (NPC1L1)			
+11	fenofibrate	Tricor	antilipemic agent, fibric acid	hypercholesterolemia	agonist	PPAR-alpha			
+11	lidocaine	Xylocaine	antiarrhythmic agent, class Ib; local anesthetic	arrhythmias [specifically: acute treatment of ventricular arrhythmias (e.g., due to myocardial infarction or during cardiac manipulation); also local and regional anesthesia]	blocker	voltage-gated sodium (NaV) channels			
+11	amiodarone	Cordarone	antiarrhythmic agent, class III	arrhythmias [specifically: acute treatment of ventricular arrhythmias (e.g., due to myocardial infarction or during cardiac manipulation); also local and regional anesthesia]	blocker	voltage-gated potassium (KV) channels			
+11	dofetilide	Tikosyn	antiarrhythmic agent, class III	arrhythmias [specifically: acute treatment of ventricular arrhythmias (e.g., due to myocardial infarction or during cardiac manipulation); also local and regional anesthesia]	blocker	voltage-gated potassium (KV) channels			
+11	diltiazem	Cardizem	calcium channel blocker (CCB), nondihydropyridine (non-DHP); antianginal agent; antiarrhythmic agent, class IV; antihypertensive [SFS note: diltiazem is a benzthiazepine, but that is not part of the drug class]	hypertension, angina, atrial fibrillation, and supraventricular tachycardia (SVT)	blocker	voltage-gated calcium (CaV) channel [L-type]			
+11	verapamil	Verelan	calcium channel blocker (CCB), nondihydropyridine (non-DHP); antianginal agent; antiarrhythmic agent, class IV; antihypertensive	hypertension, angina, atrial fibrillation, and supraventricular tachycardia (SVT)	blocker	voltage-gated calcium (CaV) channel [L-type]			
+12	losartan	Cozaar	antihypertensive, angiotensin II receptor blocker (ARB)	hypertension	reversible orthosteric antagonist	angiotensin II type 1 receptor (AT1R)			
+12	valsartan	Diovan	antihypertensive, angiotensin II receptor blocker (ARB)	hypertension	reversible orthosteric antagonist	angiotensin II type 1 receptor (AT1R)			
+12	benazepril	Lotensin	antihypertensive, angiotensin converting enzyme inhibitor (ACE-I)	hypertension; heart failure with reduced ejection fraction (HFrEF)	reversible competitive inhibitor	angiotensin-converting enzyme (ACE)			
+12	enalapril	Vasotec; Epaned	antihypertensive, angiotensin converting enzyme inhibitor (ACE-I)	hypertension; heart failure with reduced ejection fraction (HFrEF)	reversible competitive inhibitor	angiotensin-converting enzyme (ACE)			
+12	lisinopril	Zestril; Qbrelis	antihypertensive, angiotensin converting enzyme inhibitor (ACE-I)	hypertension; heart failure with reduced ejection fraction (HFrEF)	reversible competitive inhibitor	angiotensin-converting enzyme (ACE)			
+12	ramipril	Altace	antihypertensive, angiotensin converting enzyme inhibitor (ACE-I)	hypertension; heart failure with reduced ejection fraction (HFrEF)	reversible competitive inhibitor	angiotensin-converting enzyme (ACE)			
+12	furosemide	Lasix	loop diuretic; antihypertensive	edema	blocker	Na+/ K+/ 2Cl- cotransporter (NKCC2 symporter)			
+12	bumetanide	Bumex	loop diuretic; antihypertensive	edema	blocker	Na+/ K+/ 2Cl- cotransporter (NKCC2 symporter)			
+12	torsemide	Soaanz	loop diuretic; antihypertensive	edema	blocker	Na+/ K+/ 2Cl- cotransporter (NKCC2 symporter)			
+12	triamterene	Dyrenium	potassium-sparing diuretic; antihypertensive	hypertension; edema -- for patients who develop hypokalemia on HCTZ alone	blocker	ENaC			
+12	spironolactone	Aldactone; CaroSpir	potassium-sparing diuretic; antihypertensive; mineralocorticoid receptor antagonist (MRA)	heart failure with reduced ejection fraction (HFrEF); hypertension; edema 	reversible orthosteric antagonist 	mineralocorticoid receptor (aka aldosterone receptor)			
+12	hydrochlorothiazide	Microzide	thiazide diuretic; antihypertensive	hypertension; edema	blocker	NCC symporter (Na+, Cl- co-transporter)			
+12	chlorthalidone	N/A	thiazide-like diuretic	hypertension; edema	blocker	NCC symporter (Na+, Cl- co-transporter)			
+12	lisinopril + hydrochlorothiazide	Zestoretic							
+12	triamterene + hydrochlorothiazide	Maxzide							
+12	valsartan + hydrochlorothiazide	Diovan HCT							
