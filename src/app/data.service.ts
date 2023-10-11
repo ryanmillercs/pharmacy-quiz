@@ -56,13 +56,13 @@ export class DataService {
   }
 
   async readTSV() {
-    let tsv = await (await fetch('assets/drug1.tsv')).text();
+    let tsv = await (await fetch('assets/drugs.tsv')).text();
     // console.log(tsv);
     let tsv_rows = tsv.split('\n').slice(2);
     let currentStage:string = '';
     tsv_rows.forEach((row) => {
       let drug = row.split('\t');
-      if (!drug[1].match(/(Week) [0-9][0-9]/)) {
+      if (drug[1] && !drug[1].match(/(Week) [0-9][0-9]/)) {
         if (drug[0] !== '') currentStage = drug[0];
         this.drugs.push({
           Generic_name: drug[1],
