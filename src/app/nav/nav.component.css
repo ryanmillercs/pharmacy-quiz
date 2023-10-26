@@ -1,35 +1,20 @@
 mat-toolbar{
-  width:100%;
   background-color: lightblue;
-  height: 10%;
-}
-.first{
-  width:100%;
-  height: 45%;
-  /* Center the item */
-  display: flex;
+  height: 8%;
+  color: black;
   justify-content: center;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 20px;
   font-weight: bold;
+
 }
 
-.nav{
-  background-color: aliceblue !important;
-  margin-left: 5px;
+/* Style the tab group */
+mat-tab-group {
+  background-color: aliceblue; /* Background color for the tab group */
 }
 
-mat-toolbar-row{
-  width:100%;
-  display: flex;
-  padding-top: 5px;
-  justify-content: flex-end;
-  align-items: center;
+/* Style the individual tabs */
+mat-tab {
+  border: 1px solid #ccc; /* Border for the tabs */;
 }
 
-/* .spacer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} */

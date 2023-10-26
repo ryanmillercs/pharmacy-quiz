@@ -34,7 +34,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.drugs = this.dataService.getCurrentDrugs();
-    console.log(this.drugs);
+    // console.log(this.drugs);
     let question = this.getRandomQuestion();
     this.usedQuestions[question] = this.targetAnswer;
     this.currentQuestion = question;
@@ -127,7 +127,7 @@ export class QuestionComponent implements OnInit {
     } else if (colName == 'Generic_name') {
       randomDrugName = this.drugs[randomDrugNumber]['Brand_name'];
     }
-    console.log(this.drugs);
+    // console.log(this.drugs);
     console.log(`What is the ${colName} of ${randomDrugName}?`);
     return `What is the ${colName.replaceAll('_', ' ')} of ${randomDrugName}?`;
   }

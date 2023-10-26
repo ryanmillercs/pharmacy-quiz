@@ -1,10 +1,8 @@
-<mat-toolbar>
-  <mat-toolbar-row class="first">
-    <span>Drug Study Tool</span>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <button mat-raised-button class="nav" (click)="changeTab('FlashCards')">FlashCards</button>
-    <button mat-raised-button class="nav" (click)="changeTab('Questions')">Questions</button>
-    <button mat-raised-button class="nav" (click)="changeTab('List')">List</button>
-  </mat-toolbar-row>
+<mat-toolbar color="primary">
+  <span>Drug Study Tool</span>
 </mat-toolbar>
+<mat-tab-group (selectedIndexChange)="changeTab($event)">
+  <mat-tab label="FlashCards"></mat-tab>
+  <mat-tab label="Questions"></mat-tab>
+  <mat-tab label="List"></mat-tab>
+</mat-tab-group>

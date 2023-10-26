@@ -9,7 +9,8 @@
   <!-- Question -->
   <div class="question">
     <mat-card>{{currentQuestion}}</mat-card>
-    <div matTooltip={{this.targetAnswer}} matTooltipPosition="left" #tooltip="matTooltip" (click)="tooltip.toggle()" class="tip">
+    <div matTooltip={{this.targetAnswer}} matTooltipPosition="left" #tooltip="matTooltip" (click)="tooltip.toggle()"
+      class="tip">
     </div>
     <button mat-icon-button matTooltip="" (click)="tooltip.toggle()" class="questionIcon">
     </button>
@@ -19,7 +20,7 @@
   <!-- Answer Input -->
   <mat-form-field class="question-full-width">
     <input matInput placeholder="Enter your answer here" [(ngModel)]="currentAnswer" name="currentAnswer"
-      (focusout)="onInputFocusOut($event)" [class.red-background]="isBackgroundRed">
+      (focusout)="onInputFocusOut($event)" (keydown.enter) = "submitAnswer()" [class.red-background]="isBackgroundRed">
   </mat-form-field>
 
   <!-- Submit Button -->

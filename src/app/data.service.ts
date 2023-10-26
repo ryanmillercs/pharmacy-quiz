@@ -12,6 +12,7 @@ export class DataService {
   currentDrugs: any = {};
   stages = new Set();
   selectedCategories: string[] = [];
+  selectedDrugs: { [key: string]: Drug } = {};
 
   showQuestionsComponent = false;
   showListComponent = false;
@@ -55,6 +56,14 @@ export class DataService {
     this.selectedCategories = selectedCategories;
   }
 
+  getSelectedDrugs() {
+    return this.selectedDrugs;
+  }
+
+  setSelectedDrugs(selectedDrugs: { [key: string]: Drug }) {
+    this.selectedDrugs = selectedDrugs;
+  }
+
   async readTSV() {
     let tsv = await (await fetch('assets/drugs.tsv')).text();
     // console.log(tsv);
@@ -82,6 +91,7 @@ export class DataService {
     // console.log(this.drugs);
     // console.log(this.stages);
     this.stages.delete('');
+    this.stages.add('Selected');
     this.currentDrugs = this.drugs;
     // console.log(this.stages)
   }

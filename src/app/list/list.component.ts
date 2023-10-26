@@ -28,18 +28,24 @@ export class ListComponent implements OnInit {
   selectedCategories: string[] = [];
   stages = this.dataService.getStages();
   currentDrugs: any = {};
+  selectedRow: any;
+  selectedRows: { [key: string]: Drug } = {};
+  searchBox: string = '';
 
   ngOnInit() {
     this.drugs = this.dataService.getDrugs();
     this.selectedCategories = this.dataService.getSelectedCategories();
-    if(this.selectedCategories.length == 0){
+    this.selectedRows = this.dataService.getSelectedDrugs();
+    console.log(this.selectedRows);
+    if (this.selectedCategories.length == 0) {
       this.dataSource = new MatTableDataSource(this.drugs);
-    }else{
+    } else {
       this.currentDrugs = this.drugs.filter((drug: any) => {
         return this.selectedCategories.includes(drug.stage);
       });
       this.dataSource = new MatTableDataSource(this.currentDrugs);
       this.dataService.setCurrentDrugs(this.currentDrugs);
+      this.selectedChip();
     }
     // TODO Display drugs in a table
     // Add filtering of drugs by stage
@@ -47,15 +53,41 @@ export class ListComponent implements OnInit {
 
   selectedChip() {
     this.currentDrugs = this.drugs.filter((drug: any) => {
-      return this.selectedCategories.includes(drug.stage);
+      return (
+        this.selectedCategories.includes(drug.stage) ||
+        this.selectedRows[drug.Generic_name]
+      );
     });
     this.dataSource = new MatTableDataSource(this.currentDrugs);
     this.dataService.setCurrentDrugs(this.currentDrugs);
     // If no categories are selected, display all drugs
-    if(this.selectedCategories.length == 0){
+    if (this.selectedCategories.length == 0) {
       this.dataSource = new MatTableDataSource(this.drugs);
     }
     // Set so that the question component can access the current selected drugs
     this.dataService.setSelectedCategories(this.selectedCategories);
+  }
+
+  selectRow(row: Drug) {
+    console.log(this.selectedRows);
+    if (row.Generic_name in this.selectedRows) {
+      delete this.selectedRows[row.Generic_name];
+    } else {
+      this.selectedRows[row.Generic_name] = row;
+      this.dataService.setSelectedDrugs(this.selectedRows);
+    }
+  }
+
+  onInputFocusOut($event: any) {
+    console.log(this.searchBox);
+    let searched = this.drugs.filter((drug: any) => {
+      return (
+        drug.Generic_name.toLowerCase().includes(
+          this.searchBox.toLowerCase()
+        ) ||
+        drug.Brand_name.toLowerCase().includes(this.searchBox.toLowerCase())
+      );
+    });
+    this.dataSource = new MatTableDataSource(searched);
   }
 }

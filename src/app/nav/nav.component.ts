@@ -9,14 +9,25 @@ import { DataService } from '../data.service';
 export class NavComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
-
-  changeTab(mode: string) {
-    this.dataService.changeMode(mode);
+  changeTab($event: any) {
+    switch ($event) {
+      case 0:
+        this.dataService.changeMode('FlashCards');
+        break;
+      case 1:
+        this.dataService.changeMode('Questions');
+        break;
+      case 2:
+        this.dataService.changeMode('List');
+        break;
+      default:
+        break;
+    }
+    // this.dataService.changeMode(mode);
   }
 
   async ngOnInit() {
     console.log('NavComponent initialized');
     await this.dataService.readTSV();
   }
-
 }

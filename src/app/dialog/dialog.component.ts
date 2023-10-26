@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 export interface DialogData {
@@ -14,10 +14,15 @@ export interface DialogData {
 })
 
 export class DialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     console.log(data)
     this.answer = data.answer;
   }
    answer = "";
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }
